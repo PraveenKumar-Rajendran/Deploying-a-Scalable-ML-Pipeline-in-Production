@@ -1,0 +1,6 @@
+# ignore all .pyc files
+*.pyc
+*.pyo
+
+# ignore all .pkl files too from now on
+*.pkl

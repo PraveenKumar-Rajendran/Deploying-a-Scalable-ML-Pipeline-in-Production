@@ -62,5 +62,45 @@ def main():
     cprint(f"Recall: {recall:.2f}", "light_blue")
     cprint(f"F1: {fbeta:.2f}", "magenta")
 
+    """
+    output the performance of the model on slices of the data.
+    for simplicity, the function can just output the performance on slices of just the categorical features.
+    """
+    # open a file context to write the metrics
+    with open("model/metrics.txt", "w") as f:
+
+
+        # iterate over the categorical features
+        for feature in cat_features:
+            # slice the data
+            unique_values = test[feature].unique()
+            for value in unique_values:
+                mask = test[feature] == value
+                X_slice = test[mask].copy()
+                y_slice = y_test[mask].copy()
+                # process the data
+                X_slice, y_slice, _, _ = process_data(
+                    X_slice, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+                )
+                # make predictions
+                preds_slice = inference(model, X_slice)
+                # compute the metrics
+                precision, recall, fbeta = compute_model_metrics(y_slice, preds_slice)
+                # pretty print the metrics in multiple colors
+                cprint(f"Feature: {feature}, Value: {value}", "yellow")
+                cprint(f"Precision: {precision:.2f}", "green")
+                cprint(f"Recall: {recall:.2f}", "light_blue")
+                cprint(f"F1: {fbeta:.2f}", "magenta")
+
+                f.write(f"Feature: {feature}, Value: {value}\n")
+                f.write(f"Precision: {precision:.2f}\n")
+                f.write(f"Recall: {recall:.2f}\n")
+                f.write(f"F1: {fbeta:.2f}\n")
+                # add a separator
+                f.write("-"*20+"\n")
+
+            # close the file context
+    f.close()
+
 if __name__ == "__main__":
     main()
