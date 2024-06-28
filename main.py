@@ -46,7 +46,13 @@ def read_root():
 @app.post("/predict")
 def predict(data: List[DataInput]):
     # Convert list of DataInput objects to DataFrame
-    input_data = pd.DataFrame([item.dict() for item in data])
+    # input_data = pd.DataFrame([item.dict() for item in data])
+    # use the actual column names here
+    # age,workclass,fnlgt,education,education-num,marital-status,occupation,relationship,race,sex,capital-gain,capital-loss,hours-per-week,native-country
+    input_data = pd.DataFrame([item.dict() for item in data], 
+                              columns=["age", "workclass", "fnlgt", "education","education-num", 
+                                        "marital-status", "occupation", "relationship","race","sex",
+                                        "capital-gain","capital-loss", "hours-per-week","native-country"])
 
     # Process input data
     cat_features = [
@@ -68,3 +74,4 @@ def predict(data: List[DataInput]):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+    # gunicorn -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:10000
