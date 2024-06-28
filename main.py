@@ -6,6 +6,11 @@ from pydantic import BaseModel, Field
 from typing import List
 from starter.ml.data import process_data
 from starter.ml.model import train_model, compute_model_metrics, inference
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -47,15 +52,26 @@ def read_root():
 
 # Model inference endpoint
 @app.post("/predict")
-def predict(data: List[DataInput]):
+def predict(data: DataInput):
     # Convert list of DataInput objects to DataFrame
-    # input_data = pd.DataFrame([item.dict() for item in data])
-    # use the actual column names here
-    # age,workclass,fnlgt,education,education-num,marital-status,occupation,relationship,race,sex,capital-gain,capital-loss,hours-per-week,native-country
-    input_data = pd.DataFrame([item.dict() for item in data], 
-                              columns=["age", "workclass", "fnlgt", "education","education-num", 
-                                        "marital-status", "occupation", "relationship","race","sex",
-                                        "capital-gain","capital-loss", "hours-per-week","native-country"])
+    input_df = pd.DataFrame([{"age": data.age,
+                        "workclass": data.workclass,
+                        "fnlgt": data.fnlgt,
+                        "education": data.education,
+                        "education-num": data.education_num,
+                        "marital-status": data.marital_status,
+                        "occupation": data.occupation,
+                        "relationship": data.relationship,
+                        "race": data.race,
+                        "sex": data.sex,
+                        "capital-gain": data.capital_gain,
+                        "capital-loss": data.capital_loss,
+                        "hours-per-week": data.hours_per_week,
+                        "native-country": data.native_country}])
+
+
+    # Logging the input data for debugging purposes
+    logger.info(f" input_data: {input_df.to_dict()}")
 
     # Process input data
     cat_features = [
@@ -63,13 +79,15 @@ def predict(data: List[DataInput]):
         "relationship", "race", "sex", "native-country"
     ]
     X, _, _, _ = process_data(
-        input_data, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+        input_df, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
     )
 
     # Perform inference
     predictions = inference(model, X)
     # Convert predictions back to original labels
     preds = lb.inverse_transform(predictions)
+
+    logging.info(f" predictions: {preds}")
 
     # Return predictions
     return {"predictions": preds.tolist()}

@@ -1,11 +1,12 @@
 import requests
+import json
 
 # Define the URL for the FastAPI endpoint
-url = "https://deploying-a-scalable-ml-pipeline-in.onrender.com/predict/"
+# url = "https://deploying-a-scalable-ml-pipeline-in.onrender.com/predict/"
+url = "http://127.0.0.1:8000/predict/"
 
 # Sample data for inference
-sample_data = [
-    {
+sample_data = {
         "age": 39,
         "workclass": "State-gov",
         "fnlgt": 77516,
@@ -21,12 +22,9 @@ sample_data = [
         "hours_per_week": 40,
         "native_country": "United-States"
     }
-]
-
 # Make the POST request to the inference endpoint
-response = requests.post(url, json=sample_data)
+response = requests.post(url, data=json.dumps(sample_data))
 
-# Check if the request was successful
 if response.status_code == 200:
     # Print the predictions
     print("Predictions:", response.json())

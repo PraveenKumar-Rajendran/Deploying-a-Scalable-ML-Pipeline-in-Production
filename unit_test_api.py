@@ -1,17 +1,17 @@
 import pytest
 from fastapi.testclient import TestClient
 from main import app  # Ensure this imports your FastAPI app
+import json
 
 client = TestClient(app)
 
 def test_get_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Welcome to the ML Model API!"}
+    assert response.json() == {"message": "Welcome to the ML Model API Created with FastAPI!"}
 
 def test_post_predict_1():
-    sample_data = [
-        {
+    sample_data = {
             "age": 49,
             "workclass": "Private",
             "fnlgt": 160187,
@@ -27,14 +27,13 @@ def test_post_predict_1():
             "hours_per_week": 16,
             "native_country": "Jamaica"
         }
-    ]
+        
     response = client.post("/predict", json=sample_data)
     assert response.status_code == 200
-    # assert response.json()["predictions"] == ["<=50K"]
+    assert response.json()["predictions"] == ["<=50K"]
 
 def test_post_predict_2():
-    sample_data = [
-        {
+    sample_data = {
             "age": 52,
             "workclass": "Self-emp-not-inc",
             "fnlgt": 209642,
@@ -50,7 +49,7 @@ def test_post_predict_2():
             "hours_per_week": 45,
             "native_country": "United-States"
         }
-    ]
+    
     response = client.post("/predict", json=sample_data)
     assert response.status_code == 200
-    # assert response.json()["predictions"] == [">50K"]
+    assert response.json()["predictions"] == [">50K"]
