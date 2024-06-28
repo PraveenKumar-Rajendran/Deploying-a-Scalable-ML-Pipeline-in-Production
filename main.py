@@ -20,6 +20,9 @@ with open(model_path, "rb") as model_file:
 with open(lb_path, "rb") as lb_file:
     lb = pickle.load(lb_file)
 
+with open("model/encoder.pkl", "rb") as encoder_file:
+    encoder = pickle.load(encoder_file)
+
 # Define the DataInput Pydantic model
 class DataInput(BaseModel):
     age: int = Field(..., example=39)
@@ -60,7 +63,7 @@ def predict(data: List[DataInput]):
         "relationship", "race", "sex", "native-country"
     ]
     X, _, encoder, _ = process_data(
-        input_data, categorical_features=cat_features, label=None, training=False, lb=lb
+        input_data, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
     )
 
     # Perform inference

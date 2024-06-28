@@ -39,12 +39,16 @@ def main():
     # Save the model and label binarizer to disk.
     model_filename = "model/model.pkl"
     lb_filename = "model/label_binarizer.pkl"
+    encoder_filename = "model/encoder.pkl"
 
     with open(model_filename, "wb") as model_file:
         pickle.dump(model, model_file)
 
     with open(lb_filename, "wb") as lb_file:
         pickle.dump(lb, lb_file)
+
+    with open(encoder_filename, "wb") as encoder_file:
+        pickle.dump(encoder, encoder_file)
 
     # Validate the model.
     X_test, y_test, _, _ = process_data(
