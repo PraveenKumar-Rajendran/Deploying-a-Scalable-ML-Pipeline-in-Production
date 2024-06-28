@@ -54,7 +54,7 @@ def predict(data: List[DataInput]):
         "relationship", "race", "sex", "native-country"
     ]
     X, _, encoder, _ = process_data(
-        input_data, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+        input_data, categorical_features=cat_features, label=None, training=False, lb=lb
     )
 
     # Perform inference
