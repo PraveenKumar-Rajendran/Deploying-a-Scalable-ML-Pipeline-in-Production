@@ -3,4 +3,4 @@
 *.pyo
 
 # ignore all .pkl files too from now on
-*.pkl
+# *.pkl

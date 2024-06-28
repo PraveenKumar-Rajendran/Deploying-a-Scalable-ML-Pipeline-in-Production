@@ -1,7 +1,7 @@
 import requests
 
 # Define the URL for the FastAPI endpoint
-url = "https://render-deployment-example-6le1.onrender.com"
+url = "https://deploying-a-scalable-ml-pipeline-in.onrender.com/predict/"
 
 # Sample data for inference
 sample_data = [
