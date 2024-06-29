@@ -1,7 +1,11 @@
+### Project Deliverables
 
+Please refer to the [project rubrics](https://learn.udacity.com/nanodegrees/nd0821/parts/cd0582/lessons/c56b7803-a282-4d06-9af1-8f6aec27fdad/concepts/c56b7803-a282-4d06-9af1-8f6aec27fdad-project-rubric?tab=lesson) for detailed requirements.
+
+Access my submitted files below:
 
 - [Github Repo](https://github.com/PraveenKumar-Rajendran/Deploying-a-Scalable-ML-Pipeline-in-Production)
-- [Slice Output Performance](./model/metrics.txt)
+- [Slice Output Performance .txt](./model/metrics.txt)
 - [Model Card](./model_card_template.md)
 - [Continuous Integration](./screenshots/continuous_integration.png)
 - [Continuous Deployment](./screenshots/continuous_deloyment.png)
