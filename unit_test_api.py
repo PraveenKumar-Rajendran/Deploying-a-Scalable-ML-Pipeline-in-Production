@@ -6,7 +6,7 @@ import json
 client = TestClient(app)
 
 def test_get_root():
-    response = client.get("/")
+    response = client.get("https://deploying-a-scalable-ml-pipeline-in.onrender.com/")
     assert response.status_code == 200
     assert response.json() == {"message": "Welcome to the ML Model API Created with FastAPI!"}
 
@@ -28,7 +28,7 @@ def test_post_predict_1():
             "native_country": "Jamaica"
         }
         
-    response = client.post("/predict", json=sample_data)
+    response = client.post("https://deploying-a-scalable-ml-pipeline-in.onrender.com/predict", json=sample_data)
     assert response.status_code == 200
     assert response.json()["predictions"] == ["<=50K"]
 
