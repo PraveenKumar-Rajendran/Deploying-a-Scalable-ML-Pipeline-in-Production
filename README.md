@@ -12,6 +12,7 @@ Access my submitted files below:
 - [Example FastAPI](./screenshots/example.png)
 - [Live GET](./screenshots/live_get.png)
 - [Live POST](./screenshots/live_post.png)
+- [Unit Test - API](./screenshots/unit_test_api_result.png)
 
 ---
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.

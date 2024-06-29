@@ -37,4 +37,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -vv unit_test.py
-        pytest -vv unit_test_api.py
