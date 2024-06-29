@@ -34,19 +34,19 @@ def test_post_predict_1():
 
 def test_post_predict_2():
     sample_data = {
-            "age": 52,
-            "workclass": "Self-emp-not-inc",
-            "fnlgt": 209642,
-            "education": "HS-grad",
-            "education_num": 9,
-            "marital_status": "Married-civ-spouse",
-            "occupation": "Exec-managerial",
-            "relationship": "Husband",
+            "age": 31,
+            "workclass": "Private",
+            "fnlgt": 45781,
+            "education": "Masters",
+            "education_num": 14,
+            "marital_status": "Never-married",
+            "occupation": "Prof-specialty",
+            "relationship": "Not-in-family",
             "race": "White",
-            "sex": "Male",
-            "capital_gain": 0,
+            "sex": "Female",
+            "capital_gain": 14084,
             "capital_loss": 0,
-            "hours_per_week": 45,
+            "hours_per_week": 50,
             "native_country": "United-States"
         }
     
